@@ -35,6 +35,14 @@
 
 
 }
+body {
+  padding-top: 140px;  /* chỉnh con số = đúng chiều cao logo + menu */
+  background-image: url("../images/main-background.jpg"); /* đổi path cho đúng */
+  background-size: cover;     /* phóng cho full màn hình */
+  background-repeat: no-repeat; /* không lặp */
+  background-attachment: fixed; /* khi scroll thì hình đứng yên */
+  background-position: center; /* canh giữa */
+}
 /* Styling for whole site */
 .header-top {
     padding: 20px 0;
@@ -52,14 +60,7 @@ header {
 }
 
 /* đẩy toàn bộ nội dung xuống dưới header */
-body {
-  padding-top: 140px;  /* chỉnh con số = đúng chiều cao logo + menu */
-  background-image: url("../images/main-background.jpg"); /* đổi path cho đúng */
-  background-size: cover;     /* phóng cho full màn hình */
-  background-repeat: no-repeat; /* không lặp */
-  background-attachment: fixed; /* khi scroll thì hình đứng yên */
-  background-position: center; /* canh giữa */
-}
+
 
 .nav-logo {
     text-decoration: none;
@@ -689,5 +690,59 @@ div.pro-gallery .gallery-column {
 div.pro-gallery.one-row .gallery-horizontal-scroll-inner {
     position: relative;
     will-change: transform;
+}
+.gallery-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.slider {
+    width: 100%;
+    height: var(--height);
+    overflow: hidden;
+}
+
+.slider .list {
+    display: flex;
+    width: 100%;
+    min-width: calc(var(--width) * var(--quantity));
+    position: relative;
+    gap: 20px;
+}
+
+.slider .list .item {
+    width: var(--width);
+    height: var(--height);
+    position: absolute;
+    left: 100%;
+    animation: autoRun 22s linear infinite;
+    animation-delay: calc((22s / var(--quantity)) * (var(--position) - 1) - 22s) !important;
+}
+
+/* Dòng 2 lệch ra để tạo hiệu ứng xéo */
+.slider-offset .list .item {
+    animation-delay: calc((22s / var(--quantity)) * (var(--position) - 0.5) - 22s) !important;
+}
+
+.slider .list .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@keyframes autoRun {
+    from {
+        left: 100%;
+    }
+    to {
+        left: calc(var(--width) * -1);
+    }
+}
+
+.gallery-container:hover .item {
+    animation-play-state: paused !important;
 }
 
